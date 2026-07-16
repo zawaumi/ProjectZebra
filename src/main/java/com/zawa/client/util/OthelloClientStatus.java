@@ -97,9 +97,13 @@ public class OthelloClientStatus extends AbstractOthelloClientStatus {
                 }
             }
         }
+        int myCount = (this.myturn == -1) ? whiteCount : blackCount;
+        int vsCount = (this.myturn == -1) ? blackCount : whiteCount;
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%s(%s) %d : %s(%s) %d   Username:%s\n",
-                this.mynickname, MyTurnToString(), blackCount,this.vsnickname,VSTurnToString(), whiteCount, this.mynickname));
+                this.mynickname, MyTurnToString(), myCount,
+                this.vsnickname, VSTurnToString(), vsCount,
+                this.mynickname));
         String border = "＋－＋－＋－＋－＋－＋－＋－＋－＋\n";
         sb.append(border);
         for (Integer[] row : othello_array) {
@@ -114,7 +118,7 @@ public class OthelloClientStatus extends AbstractOthelloClientStatus {
             }
             sb.append("\n").append(border);
         }
-        String currentTurnColor = "未定";
+        String currentTurnColor = "None";
         if (this.turn != null) {
             if (this.turn == 1) currentTurnColor = "Black";
             else if (this.turn == -1) currentTurnColor = "White";
