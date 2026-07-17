@@ -1,0 +1,30 @@
+package com.zawa.client.ai;
+
+public class ClientRandomAI extends ClientAbstractAi {
+    String ai_name = "RandomAI";
+
+    public ClientRandomAI(Integer myturn, Integer[][] othello_array) {
+        super(myturn, othello_array);
+    }
+
+    public ClientRandomAI() {
+        super(0, new Integer[8][8]);
+    }
+
+    @Override
+    public Integer[] estimateNextPut(Integer[][] othello_array, Integer myturn) {
+        java.util.List<Integer[]> validMoves = new java.util.ArrayList<>();
+        for (int i = 0; i < othello_array.length; i++) {
+            for (int j = 0; j < othello_array[i].length; j++) {
+                if (isValidMove(othello_array, myturn, i, j)) {
+                    validMoves.add(new Integer[]{i, j});
+                }
+            }
+        }
+        if (validMoves.isEmpty()) {
+            return null;
+        }
+        int randomIndex = new java.util.Random().nextInt(validMoves.size());
+        return validMoves.get(randomIndex);
+    }
+}
