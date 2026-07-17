@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 public class ClientRandomAI extends ClientAbstractAi {
-    String ai_name = "RandomAI";
 
     public ClientRandomAI(Integer myturn, Integer[][] othello_array) {
         super(myturn, othello_array);
@@ -13,6 +12,7 @@ public class ClientRandomAI extends ClientAbstractAi {
 
     public ClientRandomAI() {
         super(0, new Integer[8][8]);
+        this.ai_name = "RandomAI";
     }
 
     @Override

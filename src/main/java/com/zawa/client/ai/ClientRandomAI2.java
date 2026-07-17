@@ -1,7 +1,6 @@
 package com.zawa.client.ai;
 
 public class ClientRandomAI2 extends ClientAbstractAi {
-    String ai_name = "RandomAI2";
 
     public ClientRandomAI2(Integer myturn, Integer[][] othello_array) {
         super(myturn, othello_array);
@@ -9,6 +8,7 @@ public class ClientRandomAI2 extends ClientAbstractAi {
 
     public ClientRandomAI2() {
         super(0, new Integer[8][8]);
+        this.ai_name = "RandomAI2";
     }
 
     @Override

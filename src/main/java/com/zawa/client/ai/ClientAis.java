@@ -7,5 +7,6 @@ public class ClientAis {
     public static void register() {
         REGISTRY.register(new ClientRandomAI());
         REGISTRY.register(new ClientRandomAI2());
+        REGISTRY.register(new ClientMonteAI());
     }
 }
