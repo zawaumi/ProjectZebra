@@ -30,16 +30,4 @@ public class ClientMessageBuilder {
                 return null;
         }
     }
-
-    EnumServerMessage whichMessage(String message){
-        if (message.startsWith("NICK")){
-            return EnumServerMessage.NICK;
-        } else if (message.startsWith("PUT")){
-            return EnumServerMessage.PUT;
-        } else if (message.startsWith("SAY")){
-            return EnumServerMessage.SAY;
-        } else {
-            return null;
-        }
-    }
 }

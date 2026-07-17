@@ -12,7 +12,7 @@ public class OthelloClientStatus extends AbstractOthelloClientStatus {
             {0,0,0,0,0,0,0,1}
     };
 
-    private Integer turn = 0;
+    private Integer turn = 1;
 
     private Integer myturn = 0;
 

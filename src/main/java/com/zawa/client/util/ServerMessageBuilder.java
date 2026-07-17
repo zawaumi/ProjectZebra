@@ -23,22 +23,4 @@ public class ServerMessageBuilder {
                 return null;
         }
     }
-
-    EnumServerMessage whichMessage(String message){
-        if (message.startsWith("SAY")){
-            return EnumServerMessage.SAY;
-        } else if (message.startsWith("BOARD")){
-            return EnumServerMessage.BOARD;
-        } else if (message.startsWith("TURN")){
-            return EnumServerMessage.TURN;
-        } else if (message.startsWith("END")){
-            return EnumServerMessage.END;
-        } else if (message.startsWith("START")){
-            return EnumServerMessage.START;
-        } else if (message.startsWith("CLOSE")){
-            return EnumServerMessage.CLOSE;
-        } else {
-            return null;
-        }
-    }
 }
