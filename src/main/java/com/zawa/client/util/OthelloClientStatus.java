@@ -9,7 +9,7 @@ public class OthelloClientStatus extends AbstractOthelloClientStatus {
             {0,0,0,-1,1,0,0,0},
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,1}
+            {0,0,0,0,0,0,0,0}
     };
 
     private Integer turn = 1;
@@ -38,7 +38,7 @@ public class OthelloClientStatus extends AbstractOthelloClientStatus {
         return this.myturn;
     }
 
-    String MyTurnToString() {
+    public String MyTurnToString() {
         if (this.myturn == 1) return "Black";
         else if (this.myturn == -1) return "White";
         else return "None";

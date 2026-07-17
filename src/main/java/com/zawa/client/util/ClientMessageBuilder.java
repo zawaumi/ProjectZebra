@@ -3,7 +3,7 @@ import com.zawa.client.network.EnumServerMessage;
 import com.zawa.client.network.EnumServerProtocol;
 
 public class ClientMessageBuilder {
-    ClientMessageBuilder(){
+    public ClientMessageBuilder(){
     }
     String prefix(EnumServerMessage message){
         switch(message){
@@ -18,7 +18,7 @@ public class ClientMessageBuilder {
         }
     }
 
-    String build(EnumServerMessage message, Object... args){
+    public String build(EnumServerMessage message, Object... args){
         switch(message){
             case NICK:
                 return prefix(message) + args[0];

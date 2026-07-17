@@ -4,6 +4,9 @@ import com.zawa.client.ai.ClientAbstractAi;
 import com.zawa.client.ai.ClientAis;
 import com.zawa.client.network.AbstractClientProtocol;
 import com.zawa.client.network.ClientProtocols;
+import com.zawa.client.network.OthelloClientReceiver;
+import com.zawa.client.network.OthelloClientSender;
+import com.zawa.client.screen.OthelloGameScreen;
 import com.zawa.client.util.OthelloClientStatus;
 
 import javax.swing.*;
@@ -11,6 +14,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -19,7 +23,9 @@ public class ProjectZebra {
     public static ClientAbstractAi aiSelected;
     public static AbstractClientProtocol protocolSelected;
     public static OthelloClientStatus status = new OthelloClientStatus();
-    public static BlockingQueue<String> queue = new LinkedBlockingQueue<>(1);
+    public static OthelloGameScreen gameScreen;
+    public static BlockingQueue<String> sendQueue = new LinkedBlockingQueue<>();
+    public static BlockingQueue<String> receiveQueue = new LinkedBlockingQueue<>();
     public static String host = "localhost";
     public static Integer port = 12345;
 
@@ -27,18 +33,32 @@ public class ProjectZebra {
         ClientAis.register();
         ClientProtocols.register();
         aiSelected = renderAiSelectMenu();
-        System.out.println("AI Selected: " + aiSelected.getClass().getSimpleName());
         protocolSelected = renderProtocolSelectMenu();
-        System.out.println("Protocol Selected: " + protocolSelected.getClass().getSimpleName());
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your nickname: ");
+        String nickname = scanner.nextLine();
+        if (nickname != null && !nickname.trim().isEmpty()) {
+            status.updateNickname(nickname.trim());
+        }
+
+        gameScreen = new OthelloGameScreen(status);
+        gameScreen.setVisible(true);
+
         MainThread.start();
         ProtocolThread.start();
     }
 
     static Thread MainThread = new Thread(() -> {
+        OthelloClientSender sender = new OthelloClientSender(sendQueue);
+        OthelloClientReceiver receiver = new OthelloClientReceiver(status, aiSelected, sender);
+
+        sender.sendNick(status.getNickname());
+        sender.sendSay("GLHF!");
         while (true) {
             try {
-                String message = queue.take();
-
+                String message = receiveQueue.take();
+                receiver.receive(message);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -46,7 +66,7 @@ public class ProjectZebra {
     });
 
     static Thread ProtocolThread = new Thread(() -> {
-            protocolSelected.connect(queue, host, port);
+        protocolSelected.connect(sendQueue, receiveQueue, host, port);
     });
 
     public static ClientAbstractAi renderAiSelectMenu() {
@@ -109,7 +129,6 @@ public class ProjectZebra {
                             panel.repaint();
                         }
                         break;
-
                     case KeyEvent.VK_ENTER:
                         result[0] = ais.get(selectedIndex[0]);
                         frame.dispose();
@@ -187,7 +206,6 @@ public class ProjectZebra {
                             panel.repaint();
                         }
                         break;
-
                     case KeyEvent.VK_ENTER:
                         result[0] = protocols.get(selectedIndex[0]);
                         frame.dispose();

@@ -14,29 +14,29 @@ public class ClientFtpProtocol extends AbstractClientProtocol {
     private Thread receiverThread;
 
     @Override
-    public void connect(BlockingQueue<String> message, String host, Integer port) {
+    public void connect(BlockingQueue<String> sendQueue, BlockingQueue<String> receiveQueue, String host, Integer port) {
         try {
             socket = new Socket(host, port);
             writer = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+
             senderThread = new Thread(() -> {
                 try {
                     while(true) {
-                        String msg = message.take();
-                        if (checkClientData(msg)) {
-                            writer.println(msg);
-                        }
+                        String msg = sendQueue.take();
+                        writer.println(msg);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
+
             receiverThread = new Thread(() -> {
                 try {
                     while(true){
                         String msg = reader.readLine();
                         if (msg != null && checkServerData(msg)) {
-                            message.put(msg);
+                            receiveQueue.put(msg);
                         }
                     }
                 } catch (Exception e) {
@@ -45,7 +45,6 @@ public class ClientFtpProtocol extends AbstractClientProtocol {
             });
             senderThread.start();
             receiverThread.start();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

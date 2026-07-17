@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 public abstract class AbstractClientProtocol {
     static Thread SenderThread;
     static Thread ReceiverThread;
-    public abstract void connect(BlockingQueue<String> message, String host, Integer port);
+    public abstract void connect(BlockingQueue<String> sendQueue, BlockingQueue<String> receiveQueue, String host, Integer port);
     public abstract void disconnect();
     public abstract Boolean checkClientData(String message);
     public abstract Boolean checkServerData(String message);

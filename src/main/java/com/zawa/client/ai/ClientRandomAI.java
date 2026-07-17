@@ -1,5 +1,9 @@
 package com.zawa.client.ai;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class ClientRandomAI extends ClientAbstractAi {
     String ai_name = "RandomAI";
 
@@ -13,7 +17,7 @@ public class ClientRandomAI extends ClientAbstractAi {
 
     @Override
     public Integer[] estimateNextPut(Integer[][] othello_array, Integer myturn) {
-        java.util.List<Integer[]> validMoves = new java.util.ArrayList<>();
+        List<Integer[]> validMoves = new ArrayList<>();
         for (int i = 0; i < othello_array.length; i++) {
             for (int j = 0; j < othello_array[i].length; j++) {
                 if (isValidMove(othello_array, myturn, i, j)) {
@@ -24,7 +28,7 @@ public class ClientRandomAI extends ClientAbstractAi {
         if (validMoves.isEmpty()) {
             return null;
         }
-        int randomIndex = new java.util.Random().nextInt(validMoves.size());
+        int randomIndex = new Random().nextInt(validMoves.size());
         return validMoves.get(randomIndex);
     }
 }
