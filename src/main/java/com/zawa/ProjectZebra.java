@@ -17,6 +17,7 @@ public class ProjectZebra {
         ClientAis.register();
         aiSelected = renderAiSelectMenu();
         System.out.println("Selected: " + aiSelected.getClass().getSimpleName());
+
     }
 
     public static ClientAbstractAi renderAiSelectMenu() {
