@@ -1,11 +1,11 @@
 package com.zawa.client.ai;
 
-public abstract class ClientAbstractAi implements ClientAiInterface {
+public abstract class AbstractClientAi implements ClientAiInterface {
     protected Integer myturn;
     protected Integer[][] othello_array;
     protected String ai_name;
 
-    public ClientAbstractAi(Integer myturn, Integer[][] othello_array) {
+    public AbstractClientAi(Integer myturn, Integer[][] othello_array) {
         this.myturn = myturn;
         this.othello_array = othello_array;
     }

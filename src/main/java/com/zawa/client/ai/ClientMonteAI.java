@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ClientMonteAI extends ClientAbstractAi {
+public class ClientMonteAI extends AbstractClientAi {
     private final int PLAYOUT_TIME_MS = 1000;
     private final Random random = new Random();
 

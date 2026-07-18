@@ -1,15 +1,15 @@
 package com.zawa.client.network;
 
 import com.zawa.ProjectZebra;
-import com.zawa.client.ai.ClientAbstractAi;
+import com.zawa.client.ai.AbstractClientAi;
 import com.zawa.client.util.OthelloClientStatus;
 
 public class OthelloClientReceiver {
     private final OthelloClientStatus status;
-    private final ClientAbstractAi ai;
+    private final AbstractClientAi ai;
     private final OthelloClientSender sender;
 
-    public OthelloClientReceiver(OthelloClientStatus status, ClientAbstractAi ai, OthelloClientSender sender) {
+    public OthelloClientReceiver(OthelloClientStatus status, AbstractClientAi ai, OthelloClientSender sender) {
         this.status = status;
         this.ai = ai;
         this.sender = sender;

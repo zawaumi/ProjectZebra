@@ -1,6 +1,6 @@
 package com.zawa.client.ai;
 
-public class ClientRandomAI2 extends ClientAbstractAi {
+public class ClientRandomAI2 extends AbstractClientAi {
 
     public ClientRandomAI2(Integer myturn, Integer[][] othello_array) {
         super(myturn, othello_array);

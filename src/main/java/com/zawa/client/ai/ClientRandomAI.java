@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ClientRandomAI extends ClientAbstractAi {
+public class ClientRandomAI extends AbstractClientAi {
 
     public ClientRandomAI(Integer myturn, Integer[][] othello_array) {
         super(myturn, othello_array);
