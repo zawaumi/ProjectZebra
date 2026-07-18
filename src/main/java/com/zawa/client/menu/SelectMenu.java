@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class SelectMenu<T> {
     private final String description;
-    private final com.zawa.client.util.AbstractClientItems<T> items;
+    private final AbstractClientItems<T> items;
 
     public SelectMenu(String description, AbstractClientItems<T> items) {
         this.description = description;
