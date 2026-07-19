@@ -1,8 +1,9 @@
 package com.zawa.client.ai;
 
 import com.zawa.client.registry.ClientAiRegistry;
+import com.zawa.client.util.AbstractClientItems;
 
-public class ClientAis extends com.zawa.client.util.AbstractClientItems<AbstractClientAi> {
+public class ClientAis extends AbstractClientItems<AbstractClientAi> {
     public static final ClientAiRegistry REGISTRY = new ClientAiRegistry();
 
     @Override
