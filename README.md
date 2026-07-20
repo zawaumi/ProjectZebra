@@ -4,6 +4,7 @@
 
 # ProjectZebra
 This is the repository for OthellogicCraft
+
 <img width="488" height="595" alt="Screenshot 2026-07-20 at 13 41 46" src="https://github.com/user-attachments/assets/68bad7d6-267d-4b03-b926-763997598bd3" />
 
 
