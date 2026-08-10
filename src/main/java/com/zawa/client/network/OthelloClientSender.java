@@ -23,6 +23,10 @@ public class OthelloClientSender {
         putToQueue(builder.build(EnumServerMessage.SAY, message));
     }
 
+    public void sendClose() {
+        putToQueue(builder.build(EnumServerMessage.CLOSE));
+    }
+
     private void putToQueue(String message) {
         try {
             if (message != null) {

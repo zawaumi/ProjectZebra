@@ -1,4 +1,6 @@
-package com.zawa.client.ai;
+package com.zawa.client.ai.research;
+
+import com.zawa.client.ai.AbstractClientAi;
 
 import java.util.ArrayList;
 import java.util.List;

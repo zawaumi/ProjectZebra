@@ -1,5 +1,6 @@
 package com.zawa.client.screen;
 
+import com.zawa.client.network.OthelloClientSender;
 import com.zawa.client.util.OthelloClientStatus;
 
 import javax.swing.*;

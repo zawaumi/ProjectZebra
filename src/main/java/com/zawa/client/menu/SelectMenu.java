@@ -3,6 +3,7 @@ package com.zawa.client.menu;
 import com.zawa.client.util.AbstractClientItems;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,6 +12,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class SelectMenu<T> {
+    private static final double mouseSense = 0.1;
+
     private final String description;
     private final AbstractClientItems<T> items;
 
@@ -57,9 +60,9 @@ public class SelectMenu<T> {
                 }
                 g.setColor(Color.LIGHT_GRAY);
                 g.setFont(new Font("Monospaced", Font.PLAIN, 14));
-                g.drawString("Press [↑] to StairUp", 20, drawY + 20);
-                g.drawString("Press [↓] to StairDown", 20, drawY + 40);
-                g.drawString("Press [Enter] to Select", 20, drawY + 60);
+                g.drawString("WheelUp or press [↑] to StairUp", 20, drawY + 20);
+                g.drawString("WheelDown press [↓] to StairDown", 20, drawY + 40);
+                g.drawString("Click or press [Enter] to Select", 20, drawY + 60);
             }
         };
         frame.add(panel);
@@ -85,6 +88,23 @@ public class SelectMenu<T> {
                         latch.countDown();
                         break;
                 }
+            }
+        });
+        frame.addMouseWheelListener(e -> {
+            if (e.getWheelRotation() < -mouseSense && selectedIndex[0] > 0) {
+                selectedIndex[0]--;
+                panel.repaint();
+            } else if (e.getWheelRotation() > mouseSense && selectedIndex[0] < itemList.size() - 1) {
+                selectedIndex[0]++;
+                panel.repaint();
+            }
+        });
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                result.set(itemList.get(selectedIndex[0]));
+                frame.dispose();
+                latch.countDown();
             }
         });
         frame.setVisible(true);

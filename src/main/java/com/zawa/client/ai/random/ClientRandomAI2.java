@@ -1,4 +1,6 @@
-package com.zawa.client.ai;
+package com.zawa.client.ai.random;
+
+import com.zawa.client.ai.AbstractClientAi;
 
 public class ClientRandomAI2 extends AbstractClientAi {
 
